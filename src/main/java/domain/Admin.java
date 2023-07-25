@@ -6,7 +6,7 @@ public class Admin extends Person{
     private String username, password;
     public Admin(){}
     public Admin(String fname, String Lname, String Address, int cnic, int phoneNo,
-                 LocalDate dob, Gender gender, String username, String password){
+                 String dob, Gender gender, String username, String password){
         super(fname, Lname, Address, cnic, phoneNo, dob, gender);
         this.username = username;
         this.password = password;

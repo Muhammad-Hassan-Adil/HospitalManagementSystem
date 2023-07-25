@@ -16,7 +16,7 @@ public class DBTablesService {
                     "username VARCHAR(50)," +
                     "password VARCHAR(50)," +
                     "experience INT," +
-                    "dateOfJoining DATE," +
+                    "dateOfJoining VARCHAR(10)," +
                     "CNIC INT," +
                     "FOREIGN KEY (CNIC) REFERENCES PERSON(CNIC)" +
                     ")");
@@ -42,7 +42,7 @@ public class DBTablesService {
                     "PatientID INT AUTO_INCREMENT PRIMARY KEY," +
                     "disease VARCHAR(50)," +
                     "Status VARCHAR(20)," +
-                    "admissionDate DATE," +
+                    "admissionDate VARCHAR(10)," +
                     "CNIC INT," +
                     "FOREIGN KEY (CNIC) REFERENCES PERSON(CNIC)" +
                     ")");
@@ -94,7 +94,7 @@ public class DBTablesService {
                     "lname VARCHAR(50)," +
                     "address VARCHAR(100)," +
                     "phoneNo INT," +
-                    "Date of Birth DATE," +
+                    "DateofBirth VARCHAR(10)," +
                     "Gender VARCHAR(10)," +
                     ")");
             statement.close();

@@ -42,7 +42,7 @@ public class PatientFunctionService {
                 patient.setPatientID(resultSet.getInt("PatientID"));
                 patient.setDisease(resultSet.getString("disease"));
                 patient.setStatus(resultSet.getString("Status"));
-                patient.setDateOfAdmission(resultSet.getDate("admissionDate").toLocalDate());
+                patient.setDateOfAdmission(resultSet.getString("admissionDate"));
                 patient.setCnic(resultSet.getInt("CNIC"));
             }
             Person person = PersonFunctionService.getPersonByCNIC(patient.getCnic());
@@ -71,7 +71,7 @@ public class PatientFunctionService {
                 patient.setPatientID(resultSet.getInt("PatientID"));
                 patient.setDisease(resultSet.getString("disease"));
                 patient.setStatus(resultSet.getString("Status"));
-                patient.setDateOfAdmission(resultSet.getDate("admissionDate").toLocalDate());
+                patient.setDateOfAdmission(resultSet.getString("admissionDate"));
                 patient.setCnic(resultSet.getInt("CNIC"));
             }
             Person person = PersonFunctionService.getPersonByCNIC(CNIC);
@@ -119,24 +119,26 @@ public class PatientFunctionService {
         }
     }
     public static List<Patient> getAllPatients() throws ClassNotFoundException {
-        try{
-            Connection connection = DBConnectionService.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Patient");
+        List<Patient> patients = new ArrayList<>();
+        try (Connection connection = DBConnectionService.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT p.*, per.Fname, per.Lname, per.address, per.phoneNo, per.DateOfBirth, per.gender " +
+                             "FROM Patient p " +
+                             "JOIN Person per ON p.CNIC = per.CNIC")) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Patient> patients = new ArrayList<>();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Patient patient = new Patient();
                 patient.setPatientID(resultSet.getInt("PatientID"));
                 patient.setDisease(resultSet.getString("disease"));
                 patient.setStatus(resultSet.getString("Status"));
-                patient.setDateOfAdmission(resultSet.getDate("admissionDate").toLocalDate());
+                patient.setDateOfAdmission(resultSet.getString("admissionDate"));
                 patient.setCnic(resultSet.getInt("CNIC"));
-                patient.setDoB(PersonFunctionService.getPersonByCNIC(resultSet.getInt("CNIC")).getDoB());
-                patient.setAddress(PersonFunctionService.getPersonByCNIC(resultSet.getInt("CNIC")).getAddress());
-                patient.setFname(PersonFunctionService.getPersonByCNIC(resultSet.getInt("CNIC")).getFname());
-                patient.setLname(PersonFunctionService.getPersonByCNIC(resultSet.getInt("CNIC")).getLname());
-                patient.setPhoneNo(PersonFunctionService.getPersonByCNIC(resultSet.getInt("CNIC")).getPhoneNo());
-                patient.setGender(PersonFunctionService.getPersonByCNIC(resultSet.getInt("CNIC")).getGender());
+                patient.setFname(resultSet.getString("Fname"));
+                patient.setLname(resultSet.getString("Lname"));
+                patient.setAddress(resultSet.getString("address"));
+                patient.setPhoneNo(resultSet.getInt("phoneNo"));
+                patient.setDoB(resultSet.getString("DateOfBirth"));
+                patient.setGender(resultSet.getString("gender"));
                 patients.add(patient);
             }
             connection.close();

@@ -49,7 +49,7 @@ public class DoctorFunctionService {
                 doctor.setUsername(resultSet.getString("username"));
                 doctor.setPassword(resultSet.getString("password"));
                 doctor.setExperience(resultSet.getInt("experience"));
-                doctor.setDateOfJoining(resultSet.getDate("dateOfJoining").toLocalDate());
+                doctor.setDateOfJoining(resultSet.getString("dateOfJoining"));
                 doctor.setCnic(resultSet.getInt("CNIC"));
             }
             Person person = PersonFunctionService.getPersonByCNIC(doctor.getCnic());
@@ -83,7 +83,7 @@ public class DoctorFunctionService {
                 doctor.setUsername(resultSet.getString("username"));
                 doctor.setPassword(resultSet.getString("password"));
                 doctor.setExperience(resultSet.getInt("experience"));
-                doctor.setDateOfJoining(resultSet.getDate("dateOfJoining").toLocalDate());
+                doctor.setDateOfJoining(resultSet.getString("dateOfJoining"));
                 doctor.setCnic(resultSet.getInt("CNIC"));
             }
             Person person = PersonFunctionService.getPersonByCNIC(CNIC);
@@ -117,7 +117,7 @@ public class DoctorFunctionService {
                 doctor.setUsername(resultSet.getString("username"));
                 doctor.setPassword(resultSet.getString("password"));
                 doctor.setExperience(resultSet.getInt("experience"));
-                doctor.setDateOfJoining(resultSet.getDate("dateOfJoining").toLocalDate());
+                doctor.setDateOfJoining(resultSet.getString("dateOfJoining"));
                 doctor.setCnic(resultSet.getInt("CNIC"));
             }
             Person person = PersonFunctionService.getPersonByCNIC(doctor.getCnic());

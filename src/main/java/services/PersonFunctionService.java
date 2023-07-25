@@ -15,7 +15,7 @@ public class PersonFunctionService {
                 person.setLname(resultSet.getString("Lname"));
                 person.setAddress(resultSet.getString("address"));
                 person.setPhoneNo(resultSet.getInt("phoneNo"));
-                person.setDoB(resultSet.getDate("DoB").toLocalDate());
+                person.setDoB(resultSet.getString("DateOfBirth"));
                 person.setGender(resultSet.getString("gender"));
             }
             connection.close();
